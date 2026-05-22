@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="lib/selectize-0.12.4/css/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="lib/selectize-0.12.4/js/selectize.min.js"></script>
+<link href="lib/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="lib/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="lib/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="lib/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="lib/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="lib/datatables-binding-0.34.0/datatables.js"></script>
+<link href="lib/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="lib/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="lib/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+  <title>Academic Research Job Feed</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<html>
+  <body style="background-color: #f6f8fa; padding-top: 40px;">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-12">
+          <h2 class="fw-bold">Academic Research Openings</h2>
+          <p class="text-muted">Last update execution check: 2026-05-22 12:31:43.120948 UTC</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card p-3 shadow-sm border-0">
+            <h6 class="fw-bold mb-3 text-secondary">Filters</h6>
+            <div id="filter_country" class="form-group crosstalk-input-select crosstalk-input">
+              <label class="control-label" for="filter_country">Country</label>
+              <div>
+                <select multiple></select>
+                <script type="application/json" data-for="filter_country">{
+  "items": {
+    "value": ["Norway"],
+    "label": ["Norway"]
+  },
+  "map": {
+    "Norway": ["1"]
+  },
+  "group": ["SharedData28c5f359"]
+}</script>
+              </div>
+            </div>
+            <br/>
+            <div id="filter_disc" class="form-group crosstalk-input-select crosstalk-input">
+              <label class="control-label" for="filter_disc">Discipline</label>
+              <div>
+                <select multiple></select>
+                <script type="application/json" data-for="filter_disc">{
+  "items": {
+    "value": ["Computational Science"],
+    "label": ["Computational Science"]
+  },
+  "map": {
+    "Computational Science": ["1"]
+  },
+  "group": ["SharedData28c5f359"]
+}</script>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card p-3 shadow-sm border-0">
+            <div class="datatables html-widget html-fill-item" id="htmlwidget-276a51548f412a594d37" style="width:100%;height:auto;"></div>
+            <script type="application/json" data-for="htmlwidget-276a51548f412a594d37">{"x":{"crosstalkOptions":{"key":"1","group":"SharedData28c5f359"},"filter":"none","vertical":false,"data":[["2026-05-22"],["Postdoctoral Researcher in Data Science"],["Norway"],["JobbNorge"],["Computational Science"],["<a href='https://www.uio.no' target='_blank' style='text-decoration:none;font-weight:bold;color:#1a5fb4;'>Apply ↗<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Date<\/th>\n      <th>Title<\/th>\n      <th>Country<\/th>\n      <th>Source<\/th>\n      <th>Discipline<\/th>\n      <th>Link<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":15,"dom":"ftp","columnDefs":[{"name":"Date","targets":0},{"name":"Title","targets":1},{"name":"Country","targets":2},{"name":"Source","targets":3},{"name":"Discipline","targets":4},{"name":"Link","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,15,25,50,100]},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+</html>
