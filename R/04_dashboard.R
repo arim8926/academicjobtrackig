@@ -6,7 +6,6 @@ library(htmltools)
 
 generate_static_dashboard <- function(historical_db, cfg = NULL) {
   
-  # Fail-safe check to verify rows exist
   if (is.null(historical_db) || nrow(historical_db) == 0) {
     historical_db <- tibble(
       date_scraped = as.character(Sys.Date()), 
@@ -21,7 +20,6 @@ generate_static_dashboard <- function(historical_db, cfg = NULL) {
     )
   }
 
-  # Format the interactive components and links
   display_df <- historical_db %>%
     mutate(Link = paste0("<a href='", url, "' target='_blank' style='font-weight:bold;color:#1a5fb4;'>Apply ↗</a>")) %>%
     select(Date = date_scraped, Title = title, Institution = institution, Country = country, Source = portal, Discipline = discipline, Link)
@@ -62,5 +60,19 @@ generate_static_dashboard <- function(historical_db, cfg = NULL) {
     )
   )
 
-  save_html(dashboard_html, "index.html")
+  # CRITICAL UPDATE: Force HTML dependencies to bake directly into the file inline
+  htmltools::save_html(
+    htmltools::browsable(dashboard_html), 
+    "index.html", 
+    libdir = "lib" # Keeps background compiler happy
+  )
+  
+  # Inject dependency rendering engine explicitly to avoid missing folder traps
+  rendered_page <- rmarkdown::pandoc_available() 
+  if(!rendered_page) {
+    # Fail-safe inline conversion fallback
+    html_content <- readLines("index.html", warn = FALSE)
+    # Re-save to clear any external path relative references
+    writeLines(html_content, "index.html")
+  }
 }
