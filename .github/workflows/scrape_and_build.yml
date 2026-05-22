@@ -30,6 +30,7 @@ jobs:
             any::crosstalk
             any::DT
             any::htmltools
+            any::rmarkdown
 
       - name: Run Scraper Pipeline
         run: |
