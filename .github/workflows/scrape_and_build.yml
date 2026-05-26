@@ -3,9 +3,17 @@ name: Run Scraper and Build Dashboard
 on:
   schedule:
     # Runs automatically every day at 6:00 AM UTC
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * without relying on that glitchy button, we need to *'
   workflow_dispatch:
-    # Allows you to click a button to run it manually anytime
+    # Allows add a third trigger: **`push`**. you to click a button to run it manually anytime
+  
+---
+
+### The Update
+
+Modifypush:
+    branches:
+      - main
 
 permissions:
   contents: write
