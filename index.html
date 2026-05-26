@@ -17,7 +17,7 @@
         <div class="row mb-4">
             <div class="col-12">
                 <h2 class="fw-bold text-dark">Academic Research Openings</h2>
-                <p class="text-muted">System Update Timestamp (UTC): 2026-05-26 11:22:00</p>
+                <p class="text-muted">System Update Timestamp (UTC): 2026-05-26 17:48:56.605087</p>
             </div>
         </div>
         <div class="row">
@@ -59,15 +59,48 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-        // Real Data Array
+        // Inject data from R directly into JavaScript
         const jobsData = [
-          { "Date": "2026-05-22", "Title": "Postdoctoral Fellow in Health Data Science", "Institution": "University of Oslo", "Country": "Norway", "Source": "JobbNorge", "Discipline": "Data Science", "Link": "<a href='https://www.jobbnorge.no/en/available-jobs/job/259654/postdoctoral-fellow-in-health-data-science' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗</a>" },
-          { "Date": "2026-05-22", "Title": "Assistant Professor in Political Science", "Institution": "University of Copenhagen", "Country": "Denmark", "Source": "Academic Positions", "Discipline": "Political Science", "Link": "<a href='https://academicpositions.com/ad/university-of-copenhagen/2026/assistant-professor/198422' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗</a>" },
-          { "Date": "2026-05-22", "Title": "Research Fellow in Computational Linguistics", "Institution": "University of Edinburgh", "Country": "United Kingdom", "Source": "jobs.ac.uk", "Discipline": "Computational Science", "Link": "<a href='https://www.jobs.ac.uk/job/DGE512/research-fellow-in-computational-linguistics' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗</a>" },
-          { "Date": "2026-05-22", "Title": "Postdoctoral Associate in Policy Research", "Institution": "Duke University", "Country": "United States", "Source": "HigherEdJobs", "Discipline": "Public Policy", "Link": "<a href='https://www.higheredjobs.com/details.cfm?JobCode=178654321' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗</a>" }
-        ];
+  {
+    "Date": "2026-05-22",
+    "Title": "Postdoctoral Fellow in Health Data Science",
+    "Institution": "University of Oslo",
+    "Country": "Norway",
+    "Source": "JobbNorge",
+    "Discipline": "Data Science",
+    "Link": "<a href='https://www.jobbnorge.no/en/available-jobs/job/259654/postdoctoral-fellow-in-health-data-science' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗<\/a>"
+  },
+  {
+    "Date": "2026-05-22",
+    "Title": "Assistant Professor in Political Science",
+    "Institution": "University of Copenhagen",
+    "Country": "Denmark",
+    "Source": "Academic Positions",
+    "Discipline": "Political Science",
+    "Link": "<a href='https://academicpositions.com/ad/university-of-copenhagen/2026/assistant-professor/198422' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗<\/a>"
+  },
+  {
+    "Date": "2026-05-22",
+    "Title": "Research Fellow in Computational Linguistics",
+    "Institution": "University of Edinburgh",
+    "Country": "United Kingdom",
+    "Source": "jobs.ac.uk",
+    "Discipline": "Computational Science",
+    "Link": "<a href='https://www.jobs.ac.uk/job/DGE512/research-fellow-in-computational-linguistics' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗<\/a>"
+  },
+  {
+    "Date": "2026-05-22",
+    "Title": "Postdoctoral Associate in Policy Research",
+    "Institution": "Duke University",
+    "Country": "United States",
+    "Source": "HigherEdJobs",
+    "Discipline": "Public Policy",
+    "Link": "<a href='https://www.higheredjobs.com/details.cfm?JobCode=178654321' target='_blank' class='btn btn-sm btn-primary fw-bold'>Apply ↗<\/a>"
+  }
+];
 
         $(document).ready(function() {
+            // Initialize DataTables
             const table = $("#jobsTable").DataTable({
                 data: jobsData,
                 columns: [
@@ -83,14 +116,24 @@
                 dom: "ftp"
             });
 
+            // Dynamically populate the sidebar dropdown filters
             const countries = [...new Set(jobsData.map(item => item.Country))].sort();
-            countries.forEach(c => { if(c) $("#countryFilter").append(`<option value="${c}">${c}</option>`); });
+            countries.forEach(c => {
+                if(c) $("#countryFilter").append(`<option value="${c}">${c}</option>`);
+            });
 
             const disciplines = [...new Set(jobsData.map(item => item.Discipline))].sort();
-            disciplines.forEach(d => { if(d) $("#disciplineFilter").append(`<option value="${d}">${d}</option>`); });
+            disciplines.forEach(d => {
+                if(d) $("#disciplineFilter").append(`<option value="${d}">${d}</option>`);
+            });
 
-            $("#countryFilter").on("change", function() { table.column(3).search(this.value).draw(); });
-            $("#disciplineFilter").on("change", function() { table.column(5).search(this.value).draw(); });
+            // Link dropdown behaviors to the DataTable filtering logic
+            $("#countryFilter").on("change", function() {
+                table.column(3).search(this.value).draw();
+            });
+            $("#disciplineFilter").on("change", function() {
+                table.column(5).search(this.value).draw();
+            });
         });
     </script>
 </body>
