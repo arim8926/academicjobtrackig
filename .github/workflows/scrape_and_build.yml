@@ -10,8 +10,11 @@ on:
     branches:
       - main
 
+# Grant permissions to write data and deploy to GitHub Pages
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   run-pipeline:
@@ -34,13 +37,21 @@ jobs:
 
       - name: Run Scraper Pipeline
         run: |
-          # This executes your main script which imports R/04_dashboard.R
           Rscript main.R
 
-      - name: Commit and Push Updated Dashboard
+      - name: Commit Updated Data
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/jobs_feed.csv index.html
           git commit -m "Automated update: $(date -u)" || echo "No changes to commit"
           git push
+
+      - name: Upload static website artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Uploads everything from root, including your new index.html
+
+      - name: Force Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
